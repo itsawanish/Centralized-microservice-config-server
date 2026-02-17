@@ -1,24 +1,27 @@
-server:
-  port: 8082   # change if 8080 already used
-
 spring:
+  application:
+    name: order-service
+
   datasource:
-    url: jdbc:mysql://localhost:3306/order_db
+    url: jdbc:mysql://localhost:3306/orderdb_dev   # changed from mysql → localhost
     username: root
-    password: Awanish@123
+    password: Test@12345
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+
+server:
+  port: 8082
 
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://localhost:8761/eureka   # changed from eurekaservice
     register-with-eureka: true
     fetch-registry: true
-
   instance:
     prefer-ip-address: true
