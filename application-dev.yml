@@ -1,3 +1,6 @@
+server:
+  port: 8082   # change if 8080 already used
+
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/order_db
@@ -9,9 +12,6 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-    database-platform: org.hibernate.dialect.MySQL8Dialect
-
-
 
 eureka:
   client:
@@ -22,5 +22,3 @@ eureka:
 
   instance:
     prefer-ip-address: true
-
-
