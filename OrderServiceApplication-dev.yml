@@ -22,12 +22,14 @@ spring:
   kafka:
     bootstrap-servers: localhost:9092
     consumer:
-      group-id: order-group
+      group-id: order-group-v2   # 👈 change group to avoid old broken offset
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
         spring.json.trusted.packages: "*"
+        spring.json.value.default.type: com.enterprises.order.dto.ProductDto
+        spring.json.use.type.headers: false   # 👈 VERY IMPORTANT
 
 eureka:
   client:
