@@ -18,8 +18,7 @@ spring:
 
   kafka:
     bootstrap-servers: localhost:9092
-
-    # 🔥 REQUIRED FOR KAFKA TRACE PROPAGATION
+    
     producer:
       observation-enabled: true
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
@@ -36,5 +35,6 @@ eureka:
 
 management:
   tracing:
+    enabled: true
     sampling:
       probability: 1.0
