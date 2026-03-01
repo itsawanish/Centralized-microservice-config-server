@@ -1,35 +1,18 @@
-server:
-  port: 9003
-
 spring:
   application:
-    name: order-service
-
-  datasource:
-    url: jdbc:mysql://localhost:3306/order_db
-    username: root
-    password: Awanish@123
-    driver-class-name: com.mysql.cj.jdbc.Driver
-
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQLDialect
+    name: notification-service
 
   kafka:
     bootstrap-servers: localhost:9092
     consumer:
-      group-id: order-group-v5   # 👈 change group to avoid old broken offset
+      group-id: order-groups
+      group-id: new-order-groups
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
-      properties:
-        spring.json.trusted.packages: "*"
-        spring.json.value.default.type: com.enterprises.order.dto.ProductDto
-        spring.json.use.type.headers: false   # 👈 VERY IMPORTANT
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+server:
+  port: 8084
 
 eureka:
   client:
