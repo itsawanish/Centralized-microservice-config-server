@@ -22,14 +22,14 @@ spring:
   kafka:
     bootstrap-servers: localhost:9092
     consumer:
-      group-id: order-group-v2   # 👈 change group to avoid old broken offset
+      group-id: order-group-v2
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
         spring.json.trusted.packages: "*"
         spring.json.value.default.type: com.enterprises.order.dto.ProductDto
-        spring.json.use.type.headers: false   # 👈 VERY IMPORTANT
+        spring.json.use.type.headers: false
 
 eureka:
   client:
@@ -39,3 +39,8 @@ eureka:
     fetch-registry: true
   instance:
     prefer-ip-address: true
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
