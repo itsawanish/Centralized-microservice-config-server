@@ -9,6 +9,9 @@ spring:
     host: localhost
     port: 6379
 
+  zipkin:
+    base-url: http://localhost:9411
+
   cloud:
     gateway:
       discovery:
@@ -52,6 +55,23 @@ management:
     sampling:
       probability: 1.0
 
-spring:
-  zipkin:
-    base-url: http://localhost:9411
+
+resilience4j:
+  circuitbreaker:
+    instances:
+
+      userServiceCircuit:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
+        permittedNumberOfCallsInHalfOpenState: 3
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+
+      paymentServiceCircuit:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
